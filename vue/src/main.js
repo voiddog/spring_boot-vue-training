@@ -8,6 +8,7 @@ import ElementUI from 'element-ui'
 import store from './store'
 import cookie from './cookie'
 import * as types from './store/mutation-types'
+import netio from './netio'
 
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -32,6 +33,7 @@ window.vm = new Vue({
     // read token from cookie
     console.log(cookie.getToken())
     store.commit(types.SET_TOKEN, cookie.getToken())
+    store.commit(types.SET_USER_ID, cookie.getCookie('user_id'))
   },
   mounted: function () {
     // if has token and no user info, getUserInfo from server
@@ -41,14 +43,26 @@ window.vm = new Vue({
         lock: true,
         text: 'Loading'
       })
-      setTimeout(() => {
-        loading.close()
-        this.$store.commit(types.SET_LOGIN, true)
-        this.$store.commit(types.SET_TOKEN, 'asdfghjklqwertyuiopzxcvbnmasdfg')
-        let userInfo = {userName: '戚耿鑫', userId: '123456'}
-        this.$store.commit(types.SET_USER_INFO, userInfo)
-        this.$router.push('/')
-      }, 1000)
+      let request = {
+        'id': store.state.user.userId,
+        'token': token
+      }
+      netio.post('/user/refresh_token', request)
+        .then(value => {
+          loading.close()
+          this.$store.commit(types.SET_LOGIN, true)
+          this.$store.commit(types.SET_TOKEN, value.token)
+          let userInfo = {userName: value.name, userId: value.id, userAvatar: value.avatar}
+          this.$store.commit(types.SET_USER_INFO, userInfo)
+          this.$router.replace('/')
+        })
+        .catch(reason => {
+          this.$store.commit(types.SET_USER_INFO, undefined)
+          this.$store.commit(types.SET_LOGIN, false)
+          this.$store.commit(types.SET_TOKEN, undefined)
+          this.$router.replace('/')
+          loading.close()
+        });
     }
   }
 })

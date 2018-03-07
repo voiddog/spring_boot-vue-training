@@ -2,7 +2,7 @@
   <div id="toolbar">
     <div class="vertical-flex-center">
       <template v-if="$store.state.isLogin">
-        <img src="@/assets/rem_user_head.png" alt="header" class="img-header">
+        <img :src="$store.state.user.userAvatar" alt="header" class="img-header">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             {{$store.state.user.userName}}

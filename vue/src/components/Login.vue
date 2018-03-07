@@ -11,6 +11,7 @@
 
 <script>
   import * as types from '@/store/mutation-types'
+  import netio from '@/netio'
 
   export default {
     name: 'Login',
@@ -26,14 +27,22 @@
           lock: true,
           text: 'Loading'
         })
-        setTimeout(() => {
-          loading.close()
-          this.$store.commit(types.SET_LOGIN, true)
-          this.$store.commit(types.SET_TOKEN, 'asdfghjklqwertyuiopzxcvbnmasdfg')
-          let userInfo = {userName: '戚耿鑫', userId: '123456'}
-          this.$store.commit(types.SET_USER_INFO, userInfo)
-          this.$router.replace('/')
-        }, 1000)
+        let request = {
+          'account': this.username,
+          'password': this.password
+        }
+        netio.post('/user/login', request)
+          .then(value => {
+            loading.close()
+            this.$store.commit(types.SET_LOGIN, true)
+            this.$store.commit(types.SET_TOKEN, value.token)
+            let userInfo = {userName: value.name, userId: value.id, userAvatar: value.avatar}
+            this.$store.commit(types.SET_USER_INFO, userInfo)
+            this.$router.replace('/')
+          })
+          .catch(reason => {
+            loading.close()
+          })
       }
     }
   }
