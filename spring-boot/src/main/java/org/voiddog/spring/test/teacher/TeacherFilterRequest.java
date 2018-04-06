@@ -17,11 +17,11 @@ public class TeacherFilterRequest extends BasePageRequest{
 
     private String job;
 
-    private Integer type;
+    private String type;
 
     private Integer gender;
 
-    private Integer levelType;
+    private String levelType;
 
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class TeacherFilterRequest extends BasePageRequest{
         this.job = job;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -95,11 +95,11 @@ public class TeacherFilterRequest extends BasePageRequest{
         this.gender = gender;
     }
 
-    public Integer getLevelType() {
+    public String getLevelType() {
         return levelType;
     }
 
-    public void setLevelType(Integer levelType) {
+    public void setLevelType(String levelType) {
         this.levelType = levelType;
     }
 }

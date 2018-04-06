@@ -30,10 +30,10 @@ public class AddTeacherRequest {
     private float cost;
 
     @NotNull
-    private Integer levelType = TeacherDAO.LEVEL_TYPE_LECTURER;
+    private String levelType;
 
     @NotNull
-    private Integer type = TeacherDAO.TYPE_INNER_PROVINCE;
+    private String type;
 
     public String getName() {
         return name;
@@ -83,14 +83,6 @@ public class AddTeacherRequest {
         this.phone = phone;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public String getRecord() {
         return record;
     }
@@ -115,11 +107,19 @@ public class AddTeacherRequest {
         this.cost = cost;
     }
 
-    public Integer getLevelType() {
+    public String getLevelType() {
         return levelType;
     }
 
-    public void setLevelType(Integer levelType) {
+    public void setLevelType(String levelType) {
         this.levelType = levelType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

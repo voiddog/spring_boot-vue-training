@@ -20,9 +20,9 @@ public class UpdateTeacherRequest {
 
     private String phone;
 
-    private Integer type;
+    private String type;
 
-    private Integer levelType;
+    private String levelType;
 
     private String record;
 
@@ -86,12 +86,20 @@ public class UpdateTeacherRequest {
         this.phone = phone;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getLevelType() {
+        return levelType;
+    }
+
+    public void setLevelType(String levelType) {
+        this.levelType = levelType;
     }
 
     public String getRecord() {
@@ -116,13 +124,5 @@ public class UpdateTeacherRequest {
 
     public void setCost(float cost) {
         this.cost = cost;
-    }
-
-    public Integer getLevelType() {
-        return levelType;
-    }
-
-    public void setLevelType(Integer levelType) {
-        this.levelType = levelType;
     }
 }

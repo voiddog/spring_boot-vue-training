@@ -8,20 +8,6 @@ import javax.persistence.*;
 @Table(name = "teacher")
 public class TeacherDAO extends BaseDAO {
 
-    // 省内
-    public static final int TYPE_INNER_PROVINCE = 0;
-    // 外省
-    public static final int TYPE_OUT_PROVINCE = 1;
-    // 全国
-    public static final int TYPE_COUNTRY = 2;
-
-    // 教授类型
-    public static final int LEVEL_TYPE_PROFESSOR = 1;
-    // 副教授
-    public static final int LEVEL_TYPE_ASSOCIATE_PROFESSOR = 2;
-    // 讲师
-    public static final int LEVEL_TYPE_LECTURER = 3;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -42,10 +28,7 @@ public class TeacherDAO extends BaseDAO {
 
     private String phone;
 
-    /**
-     * {@link #TYPE_INNER_PROVINCE}
-     */
-    private int type;
+    private String type;
 
     private String record;
 
@@ -53,7 +36,7 @@ public class TeacherDAO extends BaseDAO {
 
     private float cost;
 
-    private int levelType;
+    private String levelType;
 
     public Long getId() {
         return id;
@@ -111,11 +94,11 @@ public class TeacherDAO extends BaseDAO {
         this.phone = phone;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -143,11 +126,11 @@ public class TeacherDAO extends BaseDAO {
         this.cost = cost;
     }
 
-    public int getLevelType() {
+    public String getLevelType() {
         return levelType;
     }
 
-    public void setLevelType(int levelType) {
+    public void setLevelType(String levelType) {
         this.levelType = levelType;
     }
 }

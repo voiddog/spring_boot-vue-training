@@ -18,12 +18,12 @@ public class TeacherFilterHelper {
         return (root, query, cb) -> cb.between(root.get(TeacherDAO_.age), minAge, maxAge);
     }
 
-    public static Specification<TeacherDAO> filterByType(Integer type){
+    public static Specification<TeacherDAO> filterByType(String type){
         return (root, query, cb) -> {
             if (StringUtils.isEmpty(type)){
                 return null;
             }
-            return cb.equal(root.get(TeacherDAO_.type), type);
+            return cb.like(root.get(TeacherDAO_.type), "%"+type+"%");
         };
     }
 
@@ -63,12 +63,12 @@ public class TeacherFilterHelper {
         };
     }
 
-    public static Specification<TeacherDAO> filterByLevelType(Integer levelType) {
+    public static Specification<TeacherDAO> filterByLevelType(String levelType) {
         return (root, query, cb) -> {
             if (levelType == null) {
                 return null;
             }
-            return cb.equal(root.get(TeacherDAO_.levelType), levelType);
+            return cb.like(root.get(TeacherDAO_.levelType), "%" + levelType + "%");
         };
     }
 }

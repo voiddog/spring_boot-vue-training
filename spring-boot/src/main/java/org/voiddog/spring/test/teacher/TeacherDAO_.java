@@ -20,7 +20,7 @@ public class TeacherDAO_ {
 
     public static volatile SingularAttribute<TeacherDAO,  String> phone;
 
-    public static volatile SingularAttribute<TeacherDAO,  Integer> type;
+    public static volatile SingularAttribute<TeacherDAO,  String> type;
 
-    public static volatile SingularAttribute<TeacherDAO, Integer> levelType;
+    public static volatile SingularAttribute<TeacherDAO, String> levelType;
 }
