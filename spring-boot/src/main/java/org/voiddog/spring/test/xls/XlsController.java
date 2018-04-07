@@ -5,6 +5,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/xls")
 public class XlsController {
+
+    private static Logger logger = LoggerFactory.getLogger("Xls");
 
     @Autowired
     private XlsRepository repository;
@@ -66,20 +70,6 @@ public class XlsController {
             }
             XlsTeacherReader reader = new XlsTeacherReader();
             List<TeacherDAO> teacherDAOList = reader.parseAll(sheet);
-            for (TeacherDAO teacherDAO : teacherDAOList) {
-                System.out.println(teacherDAO.getName());
-                System.out.println(teacherDAO.getAge());
-                System.out.println(teacherDAO.getCost());
-                System.out.println(teacherDAO.getGender());
-                System.out.println(teacherDAO.getLevelType());
-                System.out.println(teacherDAO.getOrganization());
-                System.out.println(teacherDAO.getPhone());
-                System.out.println(teacherDAO.getRecord());
-                System.out.println(teacherDAO.getType());
-                System.out.println(teacherDAO.getAppraise());
-                System.out.println(teacherDAO.getJob());
-            }
-            teacherRepository.save(teacherDAOList);
         } catch (IOException e) {
             e.printStackTrace();
             throw new MessageException("读取文件错误");
@@ -92,7 +82,7 @@ public class XlsController {
         XlsTeacherWriter writer = new XlsTeacherWriter();
         XSSFWorkbook wb = new XSSFWorkbook();
         writer.writeAll(wb.createSheet(), teacherRepository.findAll());
-        String fileName = String.format("%d.xlsx", (new Date()).getTime());
+        String fileName = String.format("teachers_%d.xlsx", (new Date()).getTime());
         File saveFile = new File(Constants.getDownloadPath(), fileName);
         if (!saveFile.exists()) {
             saveFile.getParentFile().mkdirs();
@@ -116,10 +106,10 @@ public class XlsController {
         }
         // 获取文件名
         String fileName = file.getOriginalFilename();
-        System.out.println("上传的文件名为：" + fileName);
+        logger.info("上传的文件名为：" + fileName);
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        System.out.println("文件的后缀名为：" + suffixName);
+        logger.info("文件的后缀名为：" + suffixName);
         String lowerCaseSuffix = suffixName.toLowerCase();
         if (!lowerCaseSuffix.equals(".xls") && !lowerCaseSuffix.equals(".xlsx")) {
             throw new MessageException("上传文件为非 xls 文件");
@@ -138,7 +128,7 @@ public class XlsController {
         }
         XlsFileDAO dao = new XlsFileDAO();
         dao.setFilePath(resFile.getAbsolutePath());
-        System.out.println("save file to: " + resFile.getAbsolutePath());
+        logger.info("save file to: " + resFile.getAbsolutePath());
         // 拿到一个MD5转换器（如果想要SHA1参数换成”SHA1”）
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -150,7 +140,7 @@ public class XlsController {
             }
             BigInteger bigInt = new BigInteger(1, messageDigest.digest());
             dao.setFileMd5(bigInt.toString(16));
-            System.out.println("获取的文件的 md5：" + dao.getFileMd5());
+            logger.info("获取的文件的 md5：" + dao.getFileMd5());
 
             Specifications<XlsFileDAO> specifications = Specifications
                     .where(XlsFilterHelper.filterByMd5(dao.getFileMd5()));

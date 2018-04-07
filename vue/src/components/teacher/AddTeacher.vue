@@ -13,7 +13,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-select v-model.numder="reqAddData.age" placeholder="请选择教师年龄">
+        <el-select v-model="reqAddData.age" placeholder="请选择教师年龄">
           <el-option v-for="n in 100" :value="n + 17" :key="n"/>
         </el-select>
       </el-form-item>
@@ -28,17 +28,13 @@
       </el-form-item>
       <el-form-item label="教师类型">
         <el-select v-model="reqAddData.type" placeholder="请选择教师类型">
-          <el-option label="省内" :value="CNT.TEACHER_IN_PROVINCE"/>
-          <el-option label="省外" :value="CNT.TEACHER_OUT_PROVINCE"/>
-          <el-option label="国家" :value="CNT.TEACHER_COUNTRY"/>
+          <el-option :label="CNT.TEACHER_IN_PROVINCE" :value="CNT.TEACHER_IN_PROVINCE"/>
+          <el-option :label="CNT.TEACHER_OUT_PROVINCE" :value="CNT.TEACHER_OUT_PROVINCE"/>
+          <el-option :label="CNT.TEACHER_COUNTRY" :value="CNT.TEACHER_COUNTRY"/>
         </el-select>
       </el-form-item>
       <el-form-item label="教师等级">
-        <el-select v-model="reqAddData.levelType" placeholder="请选择教师类型">
-          <el-option :label="CNT.TEACHER_LEVEL_LECTURER_STR" :value="CNT.TEACHER_LEVEL_LECTURER"/>
-          <el-option :label="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR"/>
-          <el-option :label="CNT.TEACHER_LEVEL_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_PROFESSOR"/>
-        </el-select>
+        <el-input v-model="reqAddData.levelType"/>
       </el-form-item>
       <el-form-item label="费用">
         <el-input v-model.number="reqAddData.cost"/>
@@ -122,8 +118,7 @@
         reqAddData: new TeacherBean({
           gender: CNT.MALE_STR,
           age: 25,
-          type: CNT.TEACHER_IN_PROVINCE,
-          levelType: CNT.TEACHER_LEVEL_LECTURER
+          type: CNT.TEACHER_IN_PROVINCE
         }),
         CNT: {
           ...CNT

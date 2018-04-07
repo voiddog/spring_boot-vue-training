@@ -13,7 +13,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-select v-model.numder="reqAddData.age" placeholder="请选择学生年龄">
+        <el-select v-model="reqAddData.age" placeholder="请选择学生年龄">
           <el-option v-for="n in 100" :value="n + 17" :key="n"/>
         </el-select>
       </el-form-item>

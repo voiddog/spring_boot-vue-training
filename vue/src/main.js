@@ -62,7 +62,7 @@ window.vm = new Vue({
           this.$store.commit(types.SET_TOKEN, undefined)
           this.$router.replace('/')
           loading.close()
-        });
+        })
     }
   }
 })

@@ -13,7 +13,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年龄">
-          <el-select v-model.numder="dialog.edit.teacher.age" placeholder="请选择教师年龄">
+          <el-select v-model="dialog.edit.teacher.age" placeholder="请选择教师年龄">
             <el-option v-for="n in 100" :value="n + 17" :key="n"/>
           </el-select>
         </el-form-item>
@@ -28,17 +28,13 @@
         </el-form-item>
         <el-form-item label="教师类型">
           <el-select v-model="dialog.edit.teacher.type" placeholder="请选择教师类型">
-            <el-option label="省内" :value="CNT.TEACHER_IN_PROVINCE"/>
-            <el-option label="省外" :value="CNT.TEACHER_OUT_PROVINCE"/>
-            <el-option label="国家" :value="CNT.TEACHER_COUNTRY"/>
+            <el-option :label="CNT.TEACHER_IN_PROVINCE" :value="CNT.TEACHER_IN_PROVINCE"/>
+            <el-option :label="CNT.TEACHER_OUT_PROVINCE" :value="CNT.TEACHER_OUT_PROVINCE"/>
+            <el-option :label="CNT.TEACHER_COUNTRY" :value="CNT.TEACHER_COUNTRY"/>
           </el-select>
         </el-form-item>
         <el-form-item label="教师等级">
-          <el-select v-model="dialog.edit.teacher.levelType" placeholder="请选择教师类型">
-            <el-option :label="CNT.TEACHER_LEVEL_LECTURER_STR" :value="CNT.TEACHER_LEVEL_LECTURER"/>
-            <el-option :label="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR"/>
-            <el-option :label="CNT.TEACHER_LEVEL_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_PROFESSOR"/>
-          </el-select>
+          <el-input v-model.number="dialog.edit.teacher.levelType"/>
         </el-form-item>
         <el-form-item label="费用">
           <el-input v-model.number="dialog.edit.teacher.cost"/>
@@ -95,12 +91,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="等级" v-if=" 'levelType' in filterData ">
-        <el-select v-model="filterData.levelType" placeholder="等级" style="width: 100px">
-          <el-option label="全部" :value="undefined"/>
-          <el-option :label="CNT.TEACHER_LEVEL_LECTURER_STR" :value="CNT.TEACHER_LEVEL_LECTURER"/>
-          <el-option :label="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_ASSOCIATE_PROFESSOR"/>
-          <el-option :label="CNT.TEACHER_LEVEL_PROFESSOR_STR" :value="CNT.TEACHER_LEVEL_PROFESSOR"/>
-        </el-select>
+        <el-input v-model="filterData.levelType" placeholder="等级"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handlerFilter">查询</el-button>
@@ -170,7 +161,7 @@
           label="类型">
           <template slot-scope="scope">
             <el-tag :type="CNT.convertTypeTagColor(scope.row.type)">
-              {{ CNT.convertTeacherTypeToString(scope.row.type) }}
+              {{ scope.row.type }}
             </el-tag>
           </template>
         </el-table-column>
@@ -178,7 +169,7 @@
           width="100"
           label="等级">
           <template slot-scope="scope">
-            <span>{{ CNT.convertTeacherLevelToString(scope.row.levelType) }}</span>
+            <span>{{ scope.row.levelType }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -280,7 +271,7 @@
             visible: false,
             teacher: undefined
           }
-        },
+        }
       }
     },
     methods: {
@@ -331,7 +322,7 @@
             this.loading = false
           })
       },
-      deleteTeacher() {
+      deleteTeacher () {
         let remove = this.dialog.remove
         if (!remove.teacher) {
           return

@@ -12,7 +12,7 @@ public class Constants {
 
     // 性别
     public static final int MALE = 1;
-    public static final int FEMALE = 2;
+    public static final int FEMALE = 0;
 
     public static int convertGenderString(String gender) {
         switch (gender) {

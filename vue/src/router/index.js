@@ -8,6 +8,7 @@ import AddTeacher from '@/components/teacher/AddTeacher'
 import FilterTeacher from '@/components/teacher/FilterTeacher'
 import AddStudent from '@/components/student/AddStudent'
 import FilterStudent from '@/components/student/FilterStudent'
+import ImportOrExport from '@/components/ImportOrExport'
 
 Vue.use(Router)
 
@@ -59,11 +60,20 @@ const filterStudent = {
   icon: 'fas fa-search'
 }
 
+const importOrExport = {
+  path: '/import-export',
+  name: 'ImportOrExport',
+  component: ImportOrExport,
+  title: '导入导出',
+  icon: 'far fa-save'
+}
+
 const needLoginRouter = [
   {...addTeacher},
   {...filterTeacher},
   {...addStudent},
-  {...filterStudent}
+  {...filterStudent},
+  {...importOrExport}
 ]
 
 const router = new Router({
@@ -109,6 +119,7 @@ menuList.push(addTeacher)
 menuList.push(filterTeacher)
 menuList.push(addStudent)
 menuList.push(filterStudent)
+menuList.push(importOrExport)
 store.commit(types.SET_MENU_LIST, menuList)
 
 export default router

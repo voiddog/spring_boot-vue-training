@@ -13,7 +13,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年龄">
-          <el-select v-model.numder="dialog.edit.student.age" placeholder="请选择学生年龄">
+          <el-select v-model="dialog.edit.student.age" placeholder="请选择学生年龄">
             <el-option v-for="n in 100" :value="n + 17" :key="n"/>
           </el-select>
         </el-form-item>
@@ -278,7 +278,7 @@
             this.loading = false
           })
       },
-      deleteStudent() {
+      deleteStudent () {
         let remove = this.dialog.remove
         if (!remove.student) {
           return
