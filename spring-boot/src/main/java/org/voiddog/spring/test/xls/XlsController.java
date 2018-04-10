@@ -70,6 +70,8 @@ public class XlsController {
             }
             XlsTeacherReader reader = new XlsTeacherReader();
             List<TeacherDAO> teacherDAOList = reader.parseAll(sheet);
+            teacherRepository.save(teacherDAOList);
+            repository.save(dao);
         } catch (IOException e) {
             e.printStackTrace();
             throw new MessageException("读取文件错误");
@@ -97,7 +99,7 @@ public class XlsController {
             e.printStackTrace();
             throw new MessageException("文件写入错误");
         }
-        return Response.success(saveFile.getAbsolutePath());
+        return Response.success(fileName);
     }
 
     private XlsFileDAO filterFile(MultipartFile file) {
