@@ -10,6 +10,16 @@
       <br />
       <el-button type="success" @click="exportTeacher">导出教师表</el-button>
     </div>
+    <h1>学生</h1>
+    <div class="card">
+      <el-form id="student">
+        <label for="upload_teacher">导入学生</label>
+        <input type="file" id="upload_student" name="file" @change="onStudentChange($event)" accept=".xls,.xlsx">
+        <el-button size="mini" type="primary" @click="uploadStudent">导入</el-button>
+      </el-form>
+      <br />
+      <el-button type="success" @click="exportStudent">导出学生表</el-button>
+    </div>
   </div>
 </template>
 
@@ -28,7 +38,8 @@
     name: 'ImportOrExport',
     data() {
       return {
-        teacherFile: undefined
+        teacherFile: undefined,
+        studentFile: undefined
       }
     },
     methods: {
@@ -56,6 +67,34 @@
       },
       exportTeacher() {
         netio.post('/xls/backup/teacher')
+          .then(response => {
+            netio.get('/download', {params: {name: response}})
+          })
+      },
+      onStudentChange(event) {
+        this.studentFile = event.target.files[0]
+      },
+      uploadStudent() {
+        if (this.studentFile) {
+          let formData = new FormData()
+          formData.append('file', this.studentFile)
+          netio.post('/xls/upload/student', formData, {
+            method: 'post',
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(response => {
+            this.$message({
+              message: '导入成功',
+              type: 'success'
+            })
+          })
+        } else {
+          alert('请选择文件')
+        }
+      },
+      exportStudent() {
+        netio.post('/xls/backup/student')
           .then(response => {
             netio.get('/download', {params: {name: response}})
           })

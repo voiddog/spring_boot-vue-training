@@ -17,9 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.voiddog.spring.test.model.Constants;
 import org.voiddog.spring.test.model.MessageException;
 import org.voiddog.spring.test.model.Response;
+import org.voiddog.spring.test.student.StudentDAO;
 import org.voiddog.spring.test.student.StudentRepository;
 import org.voiddog.spring.test.teacher.TeacherDAO;
 import org.voiddog.spring.test.teacher.TeacherRepository;
+import org.voiddog.spring.test.xls.reader.student.XlsStudentReader;
+import org.voiddog.spring.test.xls.reader.student.XlsStudentWriter;
 import org.voiddog.spring.test.xls.reader.teacher.XlsTeacherReader;
 import org.voiddog.spring.test.xls.reader.teacher.XlsTeacherWriter;
 
@@ -46,7 +49,7 @@ public class XlsController {
     private StudentRepository studentRepository;
 
     @RequestMapping(path = "/upload/teacher", method = RequestMethod.POST)
-    public Response<XlsFileDAO> upload(@RequestParam("file") MultipartFile file){
+    public Response<XlsFileDAO> uploadTeacher(@RequestParam("file") MultipartFile file){
         XlsFileDAO dao = filterFile(file);
         if (dao == null) {
             throw new MessageException("预处理xls文件失败");
@@ -68,10 +71,44 @@ public class XlsController {
             if (row == null) {
                 throw new MessageException("属性栏为空");
             }
+            repository.save(dao);
             XlsTeacherReader reader = new XlsTeacherReader();
             List<TeacherDAO> teacherDAOList = reader.parseAll(sheet);
             teacherRepository.save(teacherDAOList);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new MessageException("读取文件错误");
+        }
+        return Response.success(dao);
+    }
+
+    @RequestMapping(path = "/upload/student", method = RequestMethod.POST)
+    public Response<XlsFileDAO> uploadStudent(@RequestParam("file") MultipartFile file) {
+        XlsFileDAO dao = filterFile(file);
+        if (dao == null) {
+            throw new MessageException("预处理xls文件失败");
+        }
+        try {
+            InputStream xlsStream = new FileInputStream(new File(dao.getFilePath()));
+            Workbook wb;
+            if (dao.getFilePath().toLowerCase().endsWith("xlsx")) {
+                wb = new XSSFWorkbook(xlsStream);
+            } else {
+                wb = new HSSFWorkbook(xlsStream);
+            }
+
+            Sheet sheet = wb.getSheetAt(0);
+            if (sheet == null) {
+                throw new MessageException("表格为空");
+            }
+            Row row = sheet.getRow(0);
+            if (row == null) {
+                throw new MessageException("属性栏为空");
+            }
             repository.save(dao);
+            XlsStudentReader reader = new XlsStudentReader();
+            List<StudentDAO> teacherDAOList = reader.parseAll(sheet);
+            studentRepository.save(teacherDAOList);
         } catch (IOException e) {
             e.printStackTrace();
             throw new MessageException("读取文件错误");
@@ -85,6 +122,29 @@ public class XlsController {
         XSSFWorkbook wb = new XSSFWorkbook();
         writer.writeAll(wb.createSheet(), teacherRepository.findAll());
         String fileName = String.format("teachers_%d.xlsx", (new Date()).getTime());
+        File saveFile = new File(Constants.getDownloadPath(), fileName);
+        if (!saveFile.exists()) {
+            saveFile.getParentFile().mkdirs();
+        }
+        try {
+            FileOutputStream outputStream = new FileOutputStream(saveFile);
+            wb.write(outputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new MessageException("文件不存在");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new MessageException("文件写入错误");
+        }
+        return Response.success(fileName);
+    }
+
+    @RequestMapping(path = "backup/student", method = RequestMethod.POST)
+    public Response<String> downloadStudent() {
+        XlsStudentWriter writer = new XlsStudentWriter();
+        XSSFWorkbook wb = new XSSFWorkbook();
+        writer.writeAll(wb.createSheet(), studentRepository.findAll());
+        String fileName = String.format("students_%d.xlsx", (new Date()).getTime());
         File saveFile = new File(Constants.getDownloadPath(), fileName);
         if (!saveFile.exists()) {
             saveFile.getParentFile().mkdirs();
