@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsJobColumn implements XlsColumn<StudentDAO> {
 
     private final String name = "职务";
-    private final Pattern pattern = Pattern.compile("^\\s*((学生的?)?(职务|单位|工作))");
+    private final Pattern pattern = Pattern.compile("^\\s*((学员的?)?(职务|单位|职务))");
 
     @Override
     public boolean isNecessary() {

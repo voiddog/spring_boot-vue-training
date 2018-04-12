@@ -14,7 +14,7 @@ public class XlsNameColumn implements XlsColumn<TeacherDAO> {
     private final String name = "姓名";
 
     public XlsNameColumn() {
-        pattern = Pattern.compile("^\\s*((姓名)|(教师姓名))");
+        pattern = Pattern.compile("^\\s*((姓名)|(老师姓名))");
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsPhoneColumn implements XlsColumn<TeacherDAO> {
 
     private final String name = "联系方式";
-    private Pattern pattern = Pattern.compile("^\\s*((教师的?)?((联系方式)|(手机号?码?)))");
+    private Pattern pattern = Pattern.compile("^\\s*((老师的?)?((联系方式)|(手机号?码?)))");
 
     @Override
     public boolean isNecessary() {

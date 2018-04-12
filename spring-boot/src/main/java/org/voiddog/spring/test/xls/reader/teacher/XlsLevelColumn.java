@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsLevelColumn implements XlsColumn<TeacherDAO> {
 
     private final String name = "级别";
-    private Pattern pattern = Pattern.compile("^\\s*((级别)|(教师级别))");
+    private Pattern pattern = Pattern.compile("^\\s*((级别)|(老师级别))");
 
     @Override
     public boolean isNecessary() {

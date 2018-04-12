@@ -1,10 +1,10 @@
 <template>
   <div id="add-student">
-    <h2>添加学生</h2>
+    <h2>添加学员</h2>
     <p>添加上课记录，<span style="color: red">*</span>为必填，其余的选填</p>
     <el-form :model="reqAddData" :rules="rules" ref="reqAddData" label-width="100px" class="card">
-      <el-form-item label="学生名称" prop="name">
-        <el-input v-model="reqAddData.name" placeholder="请输入学生名称"/>
+      <el-form-item label="学员名称" prop="name">
+        <el-input v-model="reqAddData.name" placeholder="请输入学员名称"/>
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="reqAddData.gender">
@@ -13,14 +13,14 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-select v-model="reqAddData.age" placeholder="请选择学生年龄">
+        <el-select v-model="reqAddData.age" placeholder="请选择学员年龄">
           <el-option v-for="n in 100" :value="n + 17" :key="n"/>
         </el-select>
       </el-form-item>
       <el-form-item label="单位" prop="organization">
         <el-input v-model="reqAddData.organization"/>
       </el-form-item>
-      <el-form-item label="职业" prop="job">
+      <el-form-item label="职务" prop="job">
         <el-input v-model="reqAddData.job"/>
       </el-form-item>
       <el-form-item label="电话">
@@ -35,7 +35,7 @@
       </el-form-item>
     </el-form>
     <br/>
-    <p>新增的学生列表</p>
+    <p>新增的学员列表</p>
     <el-table
       :stripe="true"
       :data="newStudents">
@@ -110,7 +110,7 @@
         },
         rules: {
           name: [
-            {required: true, message: '请输入学生名称', trigger: 'blur'},
+            {required: true, message: '请输入学员名称', trigger: 'blur'},
             {min: 1, max: 13, message: '长度在 1 到 15 个字符', trigger: 'blur'}
           ],
           organization: [
@@ -141,7 +141,7 @@
             netio.post('/student/add', request).then(data => {
               loading.close()
               this.$message({
-                message: '添加学生成功',
+                message: '添加学员成功',
                 type: 'success'
               })
               this.newStudents.push(new StudentBean(data))
@@ -169,7 +169,7 @@
           .then(resp => {
             loading.close()
             this.$message({
-              message: '删除学生成功',
+              message: '删除学员成功',
               type: 'success'
             })
             let index = this.newStudents.indexOf(studentDao)
@@ -180,7 +180,7 @@
           .catch(e => {
             loading.close()
             this.$message({
-              message: '删除学生失败',
+              message: '删除学员失败',
               type: 'error'
             })
           })

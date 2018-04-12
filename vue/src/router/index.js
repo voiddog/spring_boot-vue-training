@@ -32,7 +32,7 @@ const addTeacher = {
   path: '/add-teacher',
   name: 'AddTeacher',
   component: AddTeacher,
-  title: '添加教师',
+  title: '添加老师',
   icon: 'fab fa-nintendo-switch'
 }
 
@@ -40,7 +40,7 @@ const filterTeacher = {
   path: '/filter-teacher',
   name: 'FilterTeacher',
   component: FilterTeacher,
-  title: '查找教师',
+  title: '查找老师',
   icon: 'fas fa-chart-pie'
 }
 
@@ -48,7 +48,7 @@ const addStudent = {
   path: '/add-student',
   name: 'AddStudent',
   component: AddStudent,
-  title: '添加学生',
+  title: '添加学员',
   icon: 'fas fa-graduation-cap'
 }
 
@@ -56,7 +56,7 @@ const filterStudent = {
   path: '/filter-student',
   name: 'FilterStudent',
   component: FilterStudent,
-  title: '查找学生',
+  title: '查找学员',
   icon: 'fas fa-search'
 }
 

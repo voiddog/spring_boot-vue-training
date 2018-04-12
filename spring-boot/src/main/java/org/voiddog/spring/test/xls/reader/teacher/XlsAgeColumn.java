@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsAgeColumn implements XlsColumn<TeacherDAO> {
 
     private final String name = "年龄";
-    private final Pattern pattern = Pattern.compile("^\\s*((教师的?)?年龄)");
+    private final Pattern pattern = Pattern.compile("^\\s*((老师的?)?年龄)");
 
     @Override
     public boolean isNecessary() {

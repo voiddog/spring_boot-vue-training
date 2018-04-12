@@ -9,7 +9,7 @@ const CNT = {
   MALE_STR: '男',
   FEMALE: 0,
   FEMALE_STR: '女',
-  // 教师类型
+  // 老师类型
   TEACHER_IN_PROVINCE: '省内',
   TEACHER_OUT_PROVINCE: '省外',
   TEACHER_COUNTRY: '国家',

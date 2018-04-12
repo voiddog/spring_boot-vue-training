@@ -1,10 +1,10 @@
 <template>
   <div id="add-teacher">
-    <h2>添加教师</h2>
+    <h2>添加老师</h2>
     <p>添加上课记录，<span style="color: red">*</span>为必填，其余的选填</p>
     <el-form :model="reqAddData" :rules="rules" ref="reqAddData" label-width="100px" class="card">
-      <el-form-item label="教师名称" prop="name">
-        <el-input v-model="reqAddData.name" placeholder="请输入教师名称"/>
+      <el-form-item label="老师名称" prop="name">
+        <el-input v-model="reqAddData.name" placeholder="请输入老师名称"/>
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="reqAddData.gender">
@@ -13,27 +13,27 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄">
-        <el-select v-model="reqAddData.age" placeholder="请选择教师年龄">
+        <el-select v-model="reqAddData.age" placeholder="请选择老师年龄">
           <el-option v-for="n in 100" :value="n + 17" :key="n"/>
         </el-select>
       </el-form-item>
       <el-form-item label="单位" prop="organization">
         <el-input v-model="reqAddData.organization"/>
       </el-form-item>
-      <el-form-item label="职业" prop="job">
+      <el-form-item label="职务" prop="job">
         <el-input v-model="reqAddData.job"/>
       </el-form-item>
       <el-form-item label="电话">
         <el-input v-model.number="reqAddData.phone"/>
       </el-form-item>
-      <el-form-item label="教师类型">
-        <el-select v-model="reqAddData.type" placeholder="请选择教师类型">
+      <el-form-item label="老师类型">
+        <el-select v-model="reqAddData.type" placeholder="请选择老师类型">
           <el-option :label="CNT.TEACHER_IN_PROVINCE" :value="CNT.TEACHER_IN_PROVINCE"/>
           <el-option :label="CNT.TEACHER_OUT_PROVINCE" :value="CNT.TEACHER_OUT_PROVINCE"/>
           <el-option :label="CNT.TEACHER_COUNTRY" :value="CNT.TEACHER_COUNTRY"/>
         </el-select>
       </el-form-item>
-      <el-form-item label="教师等级">
+      <el-form-item label="老师等级">
         <el-input v-model="reqAddData.levelType"/>
       </el-form-item>
       <el-form-item label="费用">
@@ -51,7 +51,7 @@
       </el-form-item>
     </el-form>
     <br/>
-    <p>新增的教师列表</p>
+    <p>新增的老师列表</p>
     <el-table
       :stripe="true"
       :data="newTeachers">
@@ -125,7 +125,7 @@
         },
         rules: {
           name: [
-            {required: true, message: '请输入教师名称', trigger: 'blur'},
+            {required: true, message: '请输入老师名称', trigger: 'blur'},
             {min: 1, max: 13, message: '长度在 1 到 15 个字符', trigger: 'blur'}
           ],
           organization: [
@@ -156,7 +156,7 @@
             netio.post('/teacher/add', request).then(data => {
               loading.close()
               this.$message({
-                message: '添加教师成功',
+                message: '添加老师成功',
                 type: 'success'
               })
               this.newTeachers.push(new TeacherBean(data))
@@ -184,7 +184,7 @@
           .then(resp => {
             loading.close()
             this.$message({
-              message: '删除教师成功',
+              message: '删除老师成功',
               type: 'success'
             })
             let index = this.newTeachers.indexOf(teacherDao)
@@ -195,7 +195,7 @@
           .catch(e => {
             loading.close()
             this.$message({
-              message: '删除教师失败',
+              message: '删除老师失败',
               type: 'error'
             })
           })

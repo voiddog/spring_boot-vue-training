@@ -15,7 +15,7 @@ public class XlsGenderColumn implements XlsColumn<StudentDAO> {
     private final String name = "性别";
 
     public XlsGenderColumn() {
-        pattern = Pattern.compile("^\\s*((性别)|(学生性别))");
+        pattern = Pattern.compile("^\\s*((性别)|(学员性别))");
     }
 
     @Override

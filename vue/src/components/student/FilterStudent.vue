@@ -3,8 +3,8 @@
     <!--弹出框-->
     <el-dialog title="修改内容" :visible.sync="dialog.edit.visible">
       <el-form :model="dialog.edit.student" label-width="100px" v-loading="loading">
-        <el-form-item label="学生名称" prop="name">
-          <el-input v-model="dialog.edit.student.name" placeholder="请输入学生名称"/>
+        <el-form-item label="学员名称" prop="name">
+          <el-input v-model="dialog.edit.student.name" placeholder="请输入学员名称"/>
         </el-form-item>
         <el-form-item label="性别" prop="gender">
           <el-select v-model="dialog.edit.student.gender" placeholder="无" style="width: 100px">
@@ -13,14 +13,14 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年龄">
-          <el-select v-model="dialog.edit.student.age" placeholder="请选择学生年龄">
+          <el-select v-model="dialog.edit.student.age" placeholder="请选择学员年龄">
             <el-option v-for="n in 100" :value="n + 17" :key="n"/>
           </el-select>
         </el-form-item>
         <el-form-item label="单位" prop="organization">
           <el-input v-model="dialog.edit.student.organization"/>
         </el-form-item>
-        <el-form-item label="职业" prop="job">
+        <el-form-item label="职务" prop="job">
           <el-input v-model="dialog.edit.student.job"/>
         </el-form-item>
         <el-form-item label="电话">
@@ -43,15 +43,15 @@
       </span>
     </el-dialog>
     <!--正文-->
-    <h2>查找学生</h2>
-    <p>根据查找条件筛选出学生，超过一页会分页 <span class="container-hint">（筛选条件都是选填，不填则列出全部学生）</span></p>
+    <h2>查找学员</h2>
+    <p>根据查找条件筛选出学员，超过一页会分页 <span class="container-hint">（筛选条件都是选填，不填则列出全部学员）</span></p>
     <!--查询头部-->
     <el-form :inline="true" :model="filterData" size="small" id="filter-form" class="card">
       <el-form-item label="编号" v-if=" 'id' in filterData ">
-        <el-input v-model="filterData.id" placeholder="学生编号"/>
+        <el-input v-model="filterData.id" placeholder="学员编号"/>
       </el-form-item>
       <el-form-item label="姓名" v-if=" 'name' in filterData ">
-        <el-input v-model="filterData.name" placeholder="学生姓名"/>
+        <el-input v-model="filterData.name" placeholder="学员姓名"/>
       </el-form-item>
       <el-form-item label="性别" v-if=" 'gender' in filterData ">
         <el-select v-model="filterData.gender" placeholder="全部" style="width: 100px">
@@ -63,14 +63,14 @@
       <el-form-item label="单位" v-if=" 'organization' in filterData ">
         <el-input v-model="filterData.organization" placeholder="单位"/>
       </el-form-item>
-      <el-form-item label="工作" v-if=" 'job' in filterData ">
-        <el-input v-model="filterData.job" placeholder="工作"/>
+      <el-form-item label="职务" v-if=" 'job' in filterData ">
+        <el-input v-model="filterData.job" placeholder="职务"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handlerFilter">查询</el-button>
       </el-form-item>
     </el-form>
-    <!--学生列表-->
+    <!--学员列表-->
     <p>
       <span>查询结果 <i class="far fa-arrow-alt-circle-down"></i></span>
     </p>
@@ -82,7 +82,7 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="table-expand">
-              <el-form-item label="工作">
+              <el-form-item label="职务">
                 <span>{{ props.row.job }}</span>
               </el-form-item>
               <el-form-item label="单位">
@@ -289,7 +289,7 @@
             this.loading = false
             remove.visible = false
             this.$message({
-              message: '删除学生成功',
+              message: '删除学员成功',
               type: 'success'
             })
             remove.student = undefined
@@ -304,7 +304,7 @@
             this.loading = false
             remove.visible = false
             this.$message({
-              message: '删除学生失败',
+              message: '删除学员失败',
               type: 'error'
             })
           })

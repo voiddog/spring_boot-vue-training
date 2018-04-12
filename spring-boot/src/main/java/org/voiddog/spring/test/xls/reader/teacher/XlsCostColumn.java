@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsCostColumn implements XlsColumn<TeacherDAO> {
 
     private final String name = "讲课费";
-    private Pattern pattern = Pattern.compile("^\\s*((教师的?)?(讲课)?(上课)?费用?)");
+    private Pattern pattern = Pattern.compile("^\\s*((老师的?)?(讲课)?(上课)?费用?)");
 
     @Override
     public boolean isNecessary() {

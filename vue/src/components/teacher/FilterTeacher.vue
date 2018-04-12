@@ -3,8 +3,8 @@
     <!--弹出框-->
     <el-dialog title="修改内容" :visible.sync="dialog.edit.visible">
       <el-form :model="dialog.edit.teacher" label-width="100px" v-loading="loading">
-        <el-form-item label="教师名称" prop="name">
-          <el-input v-model="dialog.edit.teacher.name" placeholder="请输入教师名称"/>
+        <el-form-item label="老师名称" prop="name">
+          <el-input v-model="dialog.edit.teacher.name" placeholder="请输入老师名称"/>
         </el-form-item>
         <el-form-item label="性别" prop="gender">
           <el-select v-model="dialog.edit.teacher.gender" placeholder="无" style="width: 100px">
@@ -13,27 +13,27 @@
           </el-select>
         </el-form-item>
         <el-form-item label="年龄">
-          <el-select v-model="dialog.edit.teacher.age" placeholder="请选择教师年龄">
+          <el-select v-model="dialog.edit.teacher.age" placeholder="请选择老师年龄">
             <el-option v-for="n in 100" :value="n + 17" :key="n"/>
           </el-select>
         </el-form-item>
         <el-form-item label="单位" prop="organization">
           <el-input v-model="dialog.edit.teacher.organization"/>
         </el-form-item>
-        <el-form-item label="职业" prop="job">
+        <el-form-item label="职务" prop="job">
           <el-input v-model="dialog.edit.teacher.job"/>
         </el-form-item>
         <el-form-item label="电话">
           <el-input v-model.number="dialog.edit.teacher.phone"/>
         </el-form-item>
-        <el-form-item label="教师类型">
-          <el-select v-model="dialog.edit.teacher.type" placeholder="请选择教师类型">
+        <el-form-item label="老师类型">
+          <el-select v-model="dialog.edit.teacher.type" placeholder="请选择老师类型">
             <el-option :label="CNT.TEACHER_IN_PROVINCE" :value="CNT.TEACHER_IN_PROVINCE"/>
             <el-option :label="CNT.TEACHER_OUT_PROVINCE" :value="CNT.TEACHER_OUT_PROVINCE"/>
             <el-option :label="CNT.TEACHER_COUNTRY" :value="CNT.TEACHER_COUNTRY"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="教师等级">
+        <el-form-item label="老师等级">
           <el-input v-model.number="dialog.edit.teacher.levelType"/>
         </el-form-item>
         <el-form-item label="费用">
@@ -59,15 +59,15 @@
       </span>
     </el-dialog>
     <!--正文-->
-    <h2>查找教师</h2>
-    <p>根据查找条件筛选出教师，超过一页会分页 <span class="container-hint">（筛选条件都是选填，不填则列出全部教师）</span></p>
+    <h2>查找老师</h2>
+    <p>根据查找条件筛选出老师，超过一页会分页 <span class="container-hint">（筛选条件都是选填，不填则列出全部老师）</span></p>
     <!--查询头部-->
     <el-form :inline="true" :model="filterData" size="small" id="filter-form" class="card">
       <el-form-item label="编号" v-if=" 'id' in filterData ">
-        <el-input v-model="filterData.id" placeholder="教师编号"/>
+        <el-input v-model="filterData.id" placeholder="老师编号"/>
       </el-form-item>
       <el-form-item label="姓名" v-if=" 'name' in filterData ">
-        <el-input v-model="filterData.name" placeholder="教师姓名"/>
+        <el-input v-model="filterData.name" placeholder="老师姓名"/>
       </el-form-item>
       <el-form-item label="性别" v-if=" 'gender' in filterData ">
         <el-select v-model="filterData.gender" placeholder="全部" style="width: 100px">
@@ -79,8 +79,8 @@
       <el-form-item label="单位" v-if=" 'organization' in filterData ">
         <el-input v-model="filterData.organization" placeholder="单位"/>
       </el-form-item>
-      <el-form-item label="工作" v-if=" 'job' in filterData ">
-        <el-input v-model="filterData.job" placeholder="工作"/>
+      <el-form-item label="职务" v-if=" 'job' in filterData ">
+        <el-input v-model="filterData.job" placeholder="职务"/>
       </el-form-item>
       <el-form-item label="类型" v-if=" 'type' in filterData ">
         <el-select v-model="filterData.type" placeholder="类型" style="width: 100px">
@@ -97,7 +97,7 @@
         <el-button type="primary" @click="handlerFilter">查询</el-button>
       </el-form-item>
     </el-form>
-    <!--教师列表-->
+    <!--老师列表-->
     <p>
       <span>查询结果 <i class="far fa-arrow-alt-circle-down"></i></span>
     </p>
@@ -112,7 +112,7 @@
               <el-form-item label="花费金额">
                 <span>{{ props.row.cost }}</span>
               </el-form-item>
-              <el-form-item label="工作">
+              <el-form-item label="职务">
                 <span>{{ props.row.job }}</span>
               </el-form-item>
               <el-form-item label="单位">
@@ -333,7 +333,7 @@
             this.loading = false
             remove.visible = false
             this.$message({
-              message: '删除教师成功',
+              message: '删除老师成功',
               type: 'success'
             })
             remove.teacher = undefined
@@ -348,7 +348,7 @@
             this.loading = false
             remove.visible = false
             this.$message({
-              message: '删除教师失败',
+              message: '删除老师失败',
               type: 'error'
             })
           })

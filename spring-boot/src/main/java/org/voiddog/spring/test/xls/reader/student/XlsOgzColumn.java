@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class XlsOgzColumn implements XlsColumn<StudentDAO> {
 
     private final String name = "单位";
-    private Pattern pattern = Pattern.compile("^\\s*((单位)|(学生所在的单位)|(学生单位)|(学生所在单位))");
+    private Pattern pattern = Pattern.compile("^\\s*((单位)|(学员所在的单位)|(学员单位)|(学员所在单位))");
 
     @Override
     public boolean isNecessary() {

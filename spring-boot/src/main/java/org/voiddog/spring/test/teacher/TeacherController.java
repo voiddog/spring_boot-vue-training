@@ -60,11 +60,11 @@ public class TeacherController {
     @RequestMapping("/update")
     public Response<TeacherDAO> updateTeacher(@RequestBody UpdateTeacherRequest request) {
         if (request.getId() == null){
-            throw new MessageException("教师不存在");
+            throw new MessageException("老师不存在");
         }
         TeacherDAO findDao = repository.findOne(request.getId());
         if (findDao == null){
-            throw new MessageException("教师不存在");
+            throw new MessageException("老师不存在");
         }
         DogObjectUtils.copyPropIfNotNull(request, findDao);
         return Response.success(repository.save(findDao));

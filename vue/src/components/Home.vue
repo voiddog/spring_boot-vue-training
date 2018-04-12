@@ -1,7 +1,6 @@
 <template>
   <div id="home">
-    <img src="@/assets/bg_sakura.jpg" alt="rem">
-    <p>Sakura</p>
+    <img src="@/assets/ic_zjsfgw_logo.jpg" alt="rem">
   </div>
 </template>
 
@@ -13,11 +12,10 @@
     flex-direction: column;
     align-items: center;
     img {
-      width: 80%;
+      width: 90%;
     }
-    p {
-      font-size: 4em;
-      color: @txt-secondary;
+    h1 {
+      font-size: 2em;
     }
   }
 </style>

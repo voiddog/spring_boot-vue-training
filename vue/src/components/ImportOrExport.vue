@@ -1,24 +1,24 @@
 <template>
   <div>
-    <h1>教师</h1>
+    <h1>老师</h1>
     <div class="card">
       <el-form id="teacher">
-        <label for="upload_teacher">导入教师</label>
+        <label for="upload_teacher">导入老师</label>
         <input type="file" id="upload_teacher" name="file" @change="onTeacherChange($event)" accept=".xls,.xlsx">
         <el-button size="mini" type="primary" @click="uploadTeacher">导入</el-button>
       </el-form>
       <br />
-      <el-button type="success" @click="exportTeacher">导出教师表</el-button>
+      <el-button type="success" @click="exportTeacher">导出老师表</el-button>
     </div>
-    <h1>学生</h1>
+    <h1>学员</h1>
     <div class="card">
       <el-form id="student">
-        <label for="upload_teacher">导入学生</label>
+        <label for="upload_teacher">导入学员</label>
         <input type="file" id="upload_student" name="file" @change="onStudentChange($event)" accept=".xls,.xlsx">
         <el-button size="mini" type="primary" @click="uploadStudent">导入</el-button>
       </el-form>
       <br />
-      <el-button type="success" @click="exportStudent">导出学生表</el-button>
+      <el-button type="success" @click="exportStudent">导出学员表</el-button>
     </div>
   </div>
 </template>
